@@ -88,18 +88,18 @@ func loadStructureFromFile(path string) (map[string]interface{}, error) {
 
 	switch {
 	case strings.HasPrefix(head, "{"):
-		fmt.Println("📂 Формат: JSON")
+		fmt.Println("📂 Format: JSON")
 		if err := json.NewDecoder(file).Decode(&structure); err != nil {
 			return nil, err
 		}
 	case strings.Contains(head, "---") || strings.Contains(head, ":"):
-		fmt.Println("📂 Формат: YAML")
+		fmt.Println("📂 Format: YAML")
 		data, _ := io.ReadAll(file)
 		if err := yaml.Unmarshal(data, &structure); err != nil {
 			return nil, err
 		}
 	case strings.HasPrefix(strings.TrimSpace(head), "<"):
-		fmt.Println("📂 Формат: XML")
+		fmt.Println("📂 Format: XML")
 		dec := xml.NewDecoder(file)
 		structure, err = parseXML(dec)
 		if err != nil {
@@ -162,10 +162,10 @@ func main() {
 	if len(os.Args) > 1 {
 		inputFile = os.Args[1]
 		if _, err := os.Stat(inputFile); os.IsNotExist(err) {
-			fmt.Printf("❌ Указанный файл '%s' не существует\n", inputFile)
+			fmt.Printf("❌ The file '%s' is not exist\n", inputFile)
 			return
 		}
-		fmt.Printf("📂 Используется указанный файл: %s\n", inputFile)
+		fmt.Printf("📂 Use: %s\n", inputFile)
 	} else {
 		// No argument provided, look for default files
 		inputFiles := []string{"structure.json", "structure.yaml", "structure.yml", "structure.xml"}
@@ -177,35 +177,35 @@ func main() {
 		}
 
 		if inputFile == "" {
-			fmt.Println("❌ Не найден файл structure.json / structure.yaml / structure.xml")
+			fmt.Println("❌ Not found structure.json / structure.yaml / structure.xml")
 			return
 		}
 	}
 
 	structure, err := loadStructureFromFile(inputFile)
 	if err != nil {
-		fmt.Printf("❌ Ошибка: %v\n", err)
+		fmt.Printf("❌ Error: %v\n", err)
 		return
 	}
 
 	for projectName, projectData := range structure {
 		projectMap, ok := projectData.(map[string]interface{})
 		if !ok {
-			fmt.Println("❌ Ошибка: проектные данные не являются словарем")
+			fmt.Println("❌ Error: пproject data is not a valid dict")
 			return
 		}
 
 		if err := os.MkdirAll(projectName, 0755); err != nil {
-			fmt.Printf("❌ Ошибка: %v\n", err)
+			fmt.Printf("❌ Error: %v\n", err)
 			return
 		}
 
 		if err := createStructure(projectMap, projectName); err != nil {
-			fmt.Printf("❌ Ошибка: %v\n", err)
+			fmt.Printf("❌ Error: %v\n", err)
 			return
 		}
 
-		fmt.Printf("✅ Структура '%s' успешно создана!\n", projectName)
+		fmt.Printf("✅ Structure '%s' created successfully!\n", projectName)
 		break
 	}
 }
