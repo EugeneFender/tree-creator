@@ -14,7 +14,7 @@ A simple Go-based tool to generate directory structures from configuration files
 
 ## Installation
 ```bash
-go get github.com/yourusername/project-structure-generator
+go get github.com/EugeneFender/tree-creator
 ```
 
 ## Usage
