@@ -12,9 +12,13 @@ A simple Go-based tool to generate directory structures from configuration files
 ## Requirements
 - Go 1.16+ (for `os.MkdirAll` and `io.ReadFile`)
 
-## Installation
+## Build
 ```bash
-go get github.com/EugeneFender/tree-creator
+git clone https://github.com/EugeneFender/tree-creator.git
+cd tree-creator
+go mod init tree-creator/m/v2
+go get gopkg.in/yaml.v2
+go build tree-creator.go
 ```
 
 ## Usage
