@@ -26,10 +26,10 @@ go build tree-creator.go
 2. Run the tool:
 ```bash
 # Use specific config file
-go run main.go structure.yaml
+go run tree-creator.go structure.yaml
 
 # Or let the tool auto-detect default files
-go run main.go
+go run tree-creator.go
 ```
 
 ## Configuration File Examples
