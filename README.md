@@ -1,4 +1,4 @@
-```markdown
+
 # Project Structure Generator
 
 A simple Go-based tool to generate directory structures from configuration files in JSON, YAML, or XML format.
