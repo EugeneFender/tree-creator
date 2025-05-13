@@ -87,7 +87,7 @@ my-project:
 
 ## Output Example
 ```bash
-$ go run main.go
+$ go run tree-creator.go
 📂 Format: YAML
 ✅ Structure 'my-project' created successfully!
 ```
